@@ -59,7 +59,7 @@ nfc<NAME_LENGTH> nfc_tag;
  * \param[in] byte Protobuf serialized message .
  * \param[in] data_length Length of NFC EmbeddedProto message.
  */
-void nfc_read_tag(uint8_t *byte, uint8_t data_length){
+void nfc_read_tag(const uint8_t *byte, uint8_t data_length){
 	//Protobuf message length is stored in first byte
 	uint8_t n_bytes = byte[0]+1;
 

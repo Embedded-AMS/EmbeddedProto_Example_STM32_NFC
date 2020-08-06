@@ -71,7 +71,7 @@ class NFCReadBuffer : public ::EmbeddedProto::ReadBufferInterface
     void clear();
 
     //! Push new data into the buffer.
-    bool push(uint8_t& byte);
+    bool push(const uint8_t& byte);
 
   private:
 

@@ -94,7 +94,7 @@ void NFCReadBuffer::clear()
   write_index_ = 0;
 }
 
-bool NFCReadBuffer::push(uint8_t& byte)
+bool NFCReadBuffer::push(const uint8_t& byte)
 {
   bool return_value = MAX_SIZE > write_index_;
   if(return_value)

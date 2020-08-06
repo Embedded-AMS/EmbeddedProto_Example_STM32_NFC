@@ -28,8 +28,8 @@
  *    the Netherlands
  */
 
-#ifndef SRC_BLEPROCESSCOMMAND_H_
-#define SRC_BLEPROCESSCOMMAND_H_
+#ifndef SRC_NFCPROCESSMESSAGE_H_
+#define SRC_NFCPROCESSMESSAGE_H_
 
 #include <stdint.h>
 
@@ -40,13 +40,7 @@
  #endif
 
 
-//EXTERNC void ble_receive_command(uint8_t *byte, uint8_t data_length);
-
-//EXTERNC void ble_send_sensor(void);
-
-EXTERNC void nfc_read_tag(uint8_t *byte, uint8_t data_length);
-
-//EXTERNC uint8_t* nfc_write_tag(uint32_t *len);
+EXTERNC void nfc_read_tag(const uint8_t *byte, uint8_t data_length);
 EXTERNC void nfc_write_tag(uint8_t *buf, uint32_t *len);
 
 
@@ -54,4 +48,4 @@ EXTERNC void nfc_write_tag(uint8_t *buf, uint32_t *len);
 
 
 
-#endif /* SRC_BLEPROCESSCOMMAND_H_ */
+#endif /* SRC_NFCPROCESSMESSAGE_H_ */

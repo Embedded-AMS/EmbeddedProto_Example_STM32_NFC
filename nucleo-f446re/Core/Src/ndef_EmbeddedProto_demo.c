@@ -737,11 +737,11 @@ static void demoNdef(rfalNfcDevice *pNfcDevice)
     	ndefDemoFeature = NDEF_DEMO_WRITE_EMBEDDED_PROTO; /* returns to Write EmbeddedProto mode after write */
     	err  = ndefMessageInit(&message); /* Initialize message structure */
 
-    	EmbeddedProtoMessage.buffer = EmbeddedProtoMessageBuf;
-    	//Write to tag function
-    	//EmbeddedProtoMessage.buffer = nfc_write_tag(&EmbeddedProtoMessage.length);
-    	nfc_write_tag((uint8_t *)EmbeddedProtoMessage.buffer, &EmbeddedProtoMessage.length);
 
+    	//Write to tag function
+    	nfc_write_tag(EmbeddedProtoMessageBuf, &EmbeddedProtoMessage.length);
+
+    	EmbeddedProtoMessage.buffer = EmbeddedProtoMessageBuf;
 
     	err |= ndefRtdEpr(&epr, &EmbeddedProtoMessage); /* Initialize EmbeddedProto Record type structure */
     	err |= ndefRtdEprToRecord(&epr, &record1); /* Encode EmbeddedProto record */
@@ -820,7 +820,7 @@ static void demoNdef(rfalNfcDevice *pNfcDevice)
         	}
 
         	//Call EmbeddedProto read function
-        	nfc_read_tag((uint8_t *)message.record->bufPayload.buffer, message.record->bufPayload.length);
+        	nfc_read_tag(message.record->bufPayload.buffer, message.record->bufPayload.length);
 
         	err = ndefMessageDump(&message, verbose);
         	if( err != ERR_NONE )
