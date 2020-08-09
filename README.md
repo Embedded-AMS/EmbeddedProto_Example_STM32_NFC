@@ -28,14 +28,15 @@ The microcontroller uses a serial port to print information to a terminal such a
 2. Install a terminal, such as PuTTY.
 3. Install the dependencies required by Embedded Proto. They are listed [here](https://github.com/Embedded-AMS/EmbeddedProto).
 4. Checkout this example repository including the submodule of Embedded Proto: `git clone --recursive https://github.com/Embedded-AMS/EmbeddedProto_Example_STM32_NFC.git`.
-5. Setup the environment required for Embedded Proto and the desktop script by running the setup script: `./setup.sh`.
+5. Make setup.sh and generate_source_files.sh executable. `chmod +x setup.sh` and `chmod +x generate_source_files.sh`
+6. Setup the environment required for Embedded Proto and the desktop script by running the setup script: `./setup.sh`.
 
 The setup script already does it for you but you can regenerate the source code using the `./generate_source_files.sh` script. This is required when you have changed the \*.proto file.
 
 
 # Running the code
 
-First connect the BLE X-NUCLEO-NFC05A1 to the NUCLEO. Then connect the NUCLEO via the usb programmer and use STM32CubeIDE to build and program the microcontroller on it. Next open a terminal such as PuTTY and setup a serial connection (baudrate 115200) using the comport that is used by the NUCLEO.
+First connect the NFC evaluation board, X-NUCLEO-NFC05A1, to the NUCLEO. Then connect the NUCLEO via the usb programmer and use STM32CubeIDE to build and program the microcontroller on it. Next open a terminal such as PuTTY and setup a serial connection (baudrate 115200) using the comport that is used by the NUCLEO.
 You should see something like this:
 
 ```Insert screenshot of terminal```
