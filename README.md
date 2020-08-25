@@ -15,7 +15,7 @@ This repository hosts example code for Embedded Proto, the embedded implementati
 
 This example uses NFC to read and write a protobuf message from/to a NFC tag. 
 
-```Insert photo of setup?```
+![alt text](https://embeddedproto.com/wp-content/uploads/2020/08/NFC_hardware.jpg "NFC setup")
 
 This example makes use of a NUCLEO-F446RE, a X-NUCLEO-NFC05A1 nfc evaluation board and ST25TA tags, all made by ST Microelectronics. The microcontroller is based on an ARM Cortex-M4 processor. To build the source code and program the hardware STM32CubeIDE has been used. 
 
@@ -39,8 +39,8 @@ The setup script already does it for you but you can regenerate the source code 
 First connect the NFC evaluation board, X-NUCLEO-NFC05A1, to the NUCLEO. Then connect the NUCLEO via the usb programmer and use STM32CubeIDE to build and program the microcontroller on it. Next open a terminal such as PuTTY and setup a serial connection (baudrate 115200) using the comport that is used by the NUCLEO.
 You should see something like this:
 
-```Insert screenshot of terminal```
+![alt text](https://embeddedproto.com/wp-content/uploads/2020/08/NFC_terminal_1.jpg "Terminal screenshot of NFC menu")
 
-For more information about what the code does and how to control the application, please visit: nfc example link
+For more information about what the code does and how to control the application, please visit: [An NFC example with Embedded Proto](https://embeddedproto.com/nfc-example-with-embedded-proto/)
 
 Have fun!
