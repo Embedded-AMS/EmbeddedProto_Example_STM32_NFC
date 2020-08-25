@@ -59,25 +59,29 @@ nfc<NAME_LENGTH> nfc_tag;
  * \param[in] byte Protobuf serialized message .
  * \param[in] data_length Length of NFC EmbeddedProto message.
  */
-void nfc_read_tag(const uint8_t *byte, uint8_t data_length){
-	//Protobuf message length is stored in first byte
-	uint8_t n_bytes = byte[0]+1;
+void nfc_read_tag(const uint8_t *byte, uint8_t data_length)
+{
+  // Protobuf message length is stored in first byte
+  uint8_t n_bytes = byte[0]+1;
 
-	if(n_bytes <= data_length){
+  if(n_bytes <= data_length)
+  {
 
-		for(uint8_t i=1; i<n_bytes; i++){
-			read_buffer.push(byte[i]);
-		}
+    for(uint8_t i=1; i<n_bytes; i++)
+    {
+      read_buffer.push(byte[i]);
+    }
 
-		// Deserialize the data received.
-		auto deserialize_status = nfc_tag.deserialize(read_buffer);
-		if(::EmbeddedProto::Error::NO_ERRORS == deserialize_status) {
-			// Process the command.
-			process_nfc_tag(nfc_tag);
-		}
-	}
+    // Deserialize the data received.
+    auto deserialize_status = nfc_tag.deserialize(read_buffer);
+    if(::EmbeddedProto::Error::NO_ERRORS == deserialize_status)
+    {
+      // Process the command.
+      process_nfc_tag(nfc_tag);
+    }
+  }
 
-    read_buffer.clear();
+  read_buffer.clear();
 }
 
 //! Function builds serialized protobuf message.
@@ -88,31 +92,31 @@ void nfc_read_tag(const uint8_t *byte, uint8_t data_length){
  */
 void nfc_write_tag(uint8_t* buf, uint32_t *len)
 {
-	uint32_t message_len_index = write_buffer.get_size();
-	write_buffer.push(0); //placeholder for buffer length
+  uint32_t message_len_index = write_buffer.get_size();
+  write_buffer.push(0); //placeholder for buffer length
 
-	nfc_tag.set_clearance(nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_B);
+  nfc_tag.set_clearance(nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_B);
 
-	char name_input[] = "EmbeddedProto";
+  char name_input[] = "EmbeddedProto";
 
-	for(uint8_t i=0; i<strlen(name_input); i++){
-		nfc_tag.mutable_name()[i] = name_input[i];
-	}
+  for(uint8_t i=0; i<strlen(name_input); i++){
+    nfc_tag.mutable_name()[i] = name_input[i];
+  }
 
-	// Serialize the data.
-	auto serialization_status = nfc_tag.serialize(write_buffer);
-	if(::EmbeddedProto::Error::NO_ERRORS == serialization_status)
-	{
-		write_buffer.get_data()[message_len_index] = write_buffer.get_size()-1;
+  // Serialize the data.
+  auto serialization_status = nfc_tag.serialize(write_buffer);
+  if(::EmbeddedProto::Error::NO_ERRORS == serialization_status)
+  {
+    write_buffer.get_data()[message_len_index] = write_buffer.get_size()-1;
 
-		for (uint8_t i=0; i<write_buffer.get_size(); i++){
-			buf[i] = write_buffer.get_data()[i];
-		}
+    for (uint8_t i=0; i<write_buffer.get_size(); i++){
+      buf[i] = write_buffer.get_data()[i];
+    }
 
-		*len = write_buffer.get_size();
-	}
+    *len = write_buffer.get_size();
+  }
 
-	write_buffer.clear();
+  write_buffer.clear();
 }
 
 //! The functions takes a protobuf message and responds to it.
@@ -121,32 +125,32 @@ void nfc_write_tag(uint8_t* buf, uint32_t *len)
  */
 void process_nfc_tag(const nfc<NAME_LENGTH>& NFC)
 {
-	const char *name =  NFC.get_name();
+  const char *name =  NFC.get_name();
 
-	//Print clearance and name
-	platformLog("Name: %s\r\n", name);
+  //Print clearance and name
+  platformLog("Name: %s\r\n", name);
 
-	switch(NFC.get_clearance()){
+  switch(NFC.get_clearance())
+  {
+    case nfc<NAME_LENGTH>::CLEARANCE::NO_ACCESS:
+      platformLog("Clearance: No Access\r\n");
+      break;
 
-		case nfc<NAME_LENGTH>::CLEARANCE::NO_ACCESS:
-		platformLog("Clearance: No Access\r\n");
-		break;
+    case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_A:
+      platformLog("Clearance: Department A\r\n");
+      break;
 
-		case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_A:
-		platformLog("Clearance: Department A\r\n");
-		break;
+    case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_B:
+      platformLog("Clearance: Department B\r\n");
+      break;
 
-		case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_B:
-		platformLog("Clearance: Department B\r\n");
-		break;
+    case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_C:
+      platformLog("Clearance: Department C\r\n");
+      break;
 
-		case nfc<NAME_LENGTH>::CLEARANCE::DEPARTMENT_C:
-		platformLog("Clearance: Department C\r\n");
-		break;
-
-		default:
-			break;
-	}
+    default:
+      break;
+  }
 }
 
 
