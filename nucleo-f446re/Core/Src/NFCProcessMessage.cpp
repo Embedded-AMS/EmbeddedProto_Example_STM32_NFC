@@ -31,8 +31,8 @@
 //#include "EmbeddedProto_service.h"
 #include "NFCProcessMessage.h"
 #include "nfc_messages.h"
-#include "NFCReadBuffer.h"
-#include "NFCWriteBuffer.h"
+#include <ReadBufferFixedSize.h>
+#include <WriteBufferFixedSize.h>
 #include <Errors.h>
 
 #include <cstring>
@@ -50,8 +50,9 @@ int logUsart(const char* format, ...);
 
 
 
-NFCReadBuffer read_buffer;
-NFCWriteBuffer write_buffer;
+constexpr uint32_t BUFFER_SIZE = 50;
+::EmbeddedProto::ReadBufferFixedSize<BUFFER_SIZE> read_buffer;
+::EmbeddedProto::WriteBufferFixedSize<BUFFER_SIZE> write_buffer;
 nfc<NAME_LENGTH> nfc_tag;
 
 //! Function receives message from tag and deserializes it
@@ -125,7 +126,7 @@ void nfc_write_tag(uint8_t* buf, uint32_t *len)
  */
 void process_nfc_tag(const nfc<NAME_LENGTH>& NFC)
 {
-  const char *name =  NFC.get_name();
+  const char *name =  NFC.name();
 
   //Print clearance and name
   platformLog("Name: %s\r\n", name);
