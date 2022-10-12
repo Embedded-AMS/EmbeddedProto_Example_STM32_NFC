@@ -1,5 +1,5 @@
 
-![alt text](https://embeddedproto.com/wp-content/uploads/2020/03/Embedded-Proto-e1583834233386.png "Embedded Proto Logo")
+![alt text](https://embeddedproto.com/wp-content/uploads/2022/04/Embedded_Proto.png "Embedded Proto Logo")
 
 
 Copyrights 2020-2021 Embedded AMS B.V. Amsterdam, [www.EmbeddedAMS.nl](https://www.EmbeddedAMS.nl), [info@EmbeddedAMS.nl](mailto:info@EmbeddedAMS.nl)
@@ -28,10 +28,9 @@ The microcontroller uses a serial port to print information to a terminal such a
 2. Install a terminal, such as PuTTY.
 3. Install the dependencies required by Embedded Proto. They are listed [here](https://github.com/Embedded-AMS/EmbeddedProto).
 4. Checkout this example repository including the submodule of Embedded Proto: `git clone --recursive https://github.com/Embedded-AMS/EmbeddedProto_Example_STM32_NFC.git`.
-5. On Linux make sure the `setup.sh` and `generate_source_files.sh` are executable. Use `chmod +x setup.sh` and `chmod +x generate_source_files.sh` if needed.
-6. Setup the environment required for Embedded Proto and the desktop script by running the setup script: `./setup.sh` or `.\setup.bat`.
+5. Setup the environment required for Embedded Proto by running the setup script: `python setup.py`.
 
-The setup script already does it for you but you can regenerate the source code using the `./generate_source_files.sh` or `.\generate_source_files.bat` script. This is required when you have changed the \*.proto file.
+The setup script already does it for you but you can regenerate the source code using the `python setup.py --generate` parameter. This is required when you have changed the \*.proto file.
 
 
 # Running the code
