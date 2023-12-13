@@ -34,6 +34,7 @@ import os
 import venv
 import platform
 from sys import stderr
+import shutil
 
 # Perform a system call to beable to display colors on windows
 os.system("")
@@ -123,6 +124,18 @@ if __name__ == "__main__":
     newpath = r"./nucleo-f446re/generated"
     if not os.path.exists(newpath):
         os.makedirs(newpath)
+    
+    
+    # ---------------------------------------
+    # Clean excisting venv and other generated files.
+    if args.clean:
+        try:
+            os.remove("./nucleo-f446re/generated/nfc_messages.h")
+        except FileNotFoundError:
+            # This exception we can safely ignore as it means the file was not there. In that case we do not have to remove
+            # it.
+            pass
+    
     
     # ---------------------------------------
     if not args.generate:
