@@ -31,9 +31,9 @@
 //#include "EmbeddedProto_service.h"
 #include "NFCProcessMessage.h"
 #include "nfc_messages.h"
-#include <ReadBufferFixedSize.h>
-#include <WriteBufferFixedSize.h>
-#include <Errors.h>
+#include <EmbeddedProto/ReadBufferFixedSize.h>
+#include <EmbeddedProto/WriteBufferFixedSize.h>
+#include <EmbeddedProto/Errors.h>
 
 #include <cstring>
 #include "stm32f4xx_nucleo.h"
